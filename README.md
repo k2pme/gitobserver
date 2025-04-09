@@ -42,6 +42,7 @@ pip install -r requirements.txt
 Once the package is published on PyPI:
 ```bash
 pip install gitobserver
+git_observer
 ```
 
 ---
