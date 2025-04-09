@@ -34,7 +34,7 @@ git_observer/
 ### 📥 Install from GitHub
 ```bash
 git clone https://github.com/k2pme/gitobserver.git
-cd git-auto-commit
+cd gitobserver
 pip install -r requirements.txt
 ```
 
