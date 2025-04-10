@@ -92,6 +92,38 @@
         "documentation": {}
     },
     {
+        "label": "Observer",
+        "importPath": "watchdog.observers",
+        "description": "watchdog.observers",
+        "isExtraImport": true,
+        "detail": "watchdog.observers",
+        "documentation": {}
+    },
+    {
+        "label": "Observer",
+        "importPath": "watchdog.observers",
+        "description": "watchdog.observers",
+        "isExtraImport": true,
+        "detail": "watchdog.observers",
+        "documentation": {}
+    },
+    {
+        "label": "FileSystemEventHandler",
+        "importPath": "watchdog.events",
+        "description": "watchdog.events",
+        "isExtraImport": true,
+        "detail": "watchdog.events",
+        "documentation": {}
+    },
+    {
+        "label": "FileSystemEventHandler",
+        "importPath": "watchdog.events",
+        "description": "watchdog.events",
+        "isExtraImport": true,
+        "detail": "watchdog.events",
+        "documentation": {}
+    },
+    {
         "label": "argparse",
         "kind": 6,
         "isExtraImport": true,
@@ -107,54 +139,6 @@
         "importPath": "hashlib",
         "description": "hashlib",
         "detail": "hashlib",
-        "documentation": {}
-    },
-    {
-        "label": "FileSystemEventHandler",
-        "importPath": "watchdog.events",
-        "description": "watchdog.events",
-        "isExtraImport": true,
-        "detail": "watchdog.events",
-        "documentation": {}
-    },
-    {
-        "label": "FileSystemEventHandler",
-        "importPath": "watchdog.events",
-        "description": "watchdog.events",
-        "isExtraImport": true,
-        "detail": "watchdog.events",
-        "documentation": {}
-    },
-    {
-        "label": "git_commit_push",
-        "importPath": "git_handler",
-        "description": "git_handler",
-        "isExtraImport": true,
-        "detail": "git_handler",
-        "documentation": {}
-    },
-    {
-        "label": "get_current_directory",
-        "importPath": "git_observer.utils",
-        "description": "git_observer.utils",
-        "isExtraImport": true,
-        "detail": "git_observer.utils",
-        "documentation": {}
-    },
-    {
-        "label": "Observer",
-        "importPath": "watchdog.observers",
-        "description": "watchdog.observers",
-        "isExtraImport": true,
-        "detail": "watchdog.observers",
-        "documentation": {}
-    },
-    {
-        "label": "Observer",
-        "importPath": "watchdog.observers",
-        "description": "watchdog.observers",
-        "isExtraImport": true,
-        "detail": "watchdog.observers",
         "documentation": {}
     },
     {
@@ -203,55 +187,19 @@
     {
         "label": "GitAutoCommitHandler",
         "kind": 6,
-        "importPath": "git_observer.watcher copy",
-        "description": "git_observer.watcher copy",
-        "peekOfCode": "class GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n    def on_any_event(self, event):\n        \"\"\"Gère tous les événements (création, modification, suppression, déplacement).\"\"\"",
-        "detail": "git_observer.watcher copy",
-        "documentation": {}
-    },
-    {
-        "label": "parse_arguments",
-        "kind": 2,
-        "importPath": "git_observer.watcher copy",
-        "description": "git_observer.watcher copy",
-        "peekOfCode": "def parse_arguments():\n    \"\"\"Analyse les arguments CLI pour configurer le comportement.\"\"\"\n    parser = argparse.ArgumentParser(description=\"Surveille un dossier et effectue des commits automatiques.\")\n    parser.add_argument(\"--mode\", type=str, choices=[MODE_AUTO, MODE_PATTERN], default=MODE_AUTO, help=\"Mode d'exécution : 'auto' (par défaut) ou 'pattern'\")\n    parser.add_argument(\"--delay\", type=int, default=30, help=\"Délai en secondes pour le commit automatique (mode auto).\")\n    parser.add_argument(\"--message\", type=str, default=\"Mise à jour automatique\", help=\"Message de commit par défaut.\")\n    return parser.parse_args()\n# if __name__ == \"__main__\":\n#     args = parse_arguments()\n#     print(f\"{Fore.GREEN}🚀 Mode : {args.mode}, Delay : {args.delay}s, Message : {args.message}{Style.RESET_ALL}\")",
-        "detail": "git_observer.watcher copy",
+        "importPath": "git_observer.watcher.copy",
+        "description": "git_observer.watcher.copy",
+        "peekOfCode": "class GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Classe qui écoute les modifications et pousse les commits automatiquement.\"\"\"\n    def __init__(self):\n        super().__init__()\n        self.git_handler = GitHandler()\n    def on_modified(self, event):\n        \"\"\"Déclenché lorsqu'un fichier est modifié.\"\"\"\n        if event.is_directory or any(excluded in event.src_path for excluded in [\".git\", \"node_modules\"]) or os.path.basename(event.src_path).startswith(\".\"):\n            return  # Ignore les dossiers et fichiers cachés\n        file_path = event.src_path",
+        "detail": "git_observer.watcher.copy",
         "documentation": {}
     },
     {
         "label": "start_watcher",
         "kind": 2,
-        "importPath": "git_observer.watcher copy",
-        "description": "git_observer.watcher copy",
-        "peekOfCode": "def start_watcher():\n    \"\"\"Démarre la surveillance du dossier\"\"\"\n    args = parse_arguments()\n    print(f\"{Fore.GREEN}🚀 Mode : {args.mode}, Delay : {args.delay}s, Message : {args.message}{Style.RESET_ALL}\")\n    watched_dir = get_current_directory()\n    print(f\"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}\")\n    event_handler = GitAutoCommitHandler(mode=args.mode, commit_delay=args.delay, default_message=args.message)\n    # event_handler = GitAutoCommitHandler()\n    observer = Observer()\n    observer.schedule(event_handler, watched_dir, recursive=True)",
-        "detail": "git_observer.watcher copy",
-        "documentation": {}
-    },
-    {
-        "label": "MODE_AUTO",
-        "kind": 5,
-        "importPath": "git_observer.watcher copy",
-        "description": "git_observer.watcher copy",
-        "peekOfCode": "MODE_AUTO = \"auto\"\nMODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay",
-        "detail": "git_observer.watcher copy",
-        "documentation": {}
-    },
-    {
-        "label": "MODE_PATTERN",
-        "kind": 5,
-        "importPath": "git_observer.watcher copy",
-        "description": "git_observer.watcher copy",
-        "peekOfCode": "MODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message",
-        "detail": "git_observer.watcher copy",
-        "documentation": {}
-    },
-    {
-        "label": "MODIFIED_FILES",
-        "kind": 5,
-        "importPath": "git_observer.watcher copy",
-        "description": "git_observer.watcher copy",
-        "peekOfCode": "MODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n    def on_any_event(self, event):",
-        "detail": "git_observer.watcher copy",
+        "importPath": "git_observer.watcher.copy",
+        "description": "git_observer.watcher.copy",
+        "peekOfCode": "def start_watcher():\n    \"\"\"Démarre la surveillance du dossier\"\"\"\n    watched_dir = get_current_directory()\n    print(f\"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}\")\n    event_handler = GitAutoCommitHandler()\n    observer = Observer()\n    observer.schedule(event_handler, watched_dir, recursive=True)\n    try:\n        observer.start()\n        while True:",
+        "detail": "git_observer.watcher.copy",
         "documentation": {}
     },
     {
@@ -259,7 +207,16 @@
         "kind": 6,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "class GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Classe qui écoute les modifications et pousse les commits automatiquement.\"\"\"\n    def __init__(self):\n        super().__init__()\n        self.git_handler = GitHandler()\n    def on_modified(self, event):\n        \"\"\"Déclenché lorsqu'un fichier est modifié.\"\"\"\n        if event.is_directory or any(excluded in event.src_path for excluded in [\".git\", \"node_modules\"]) or os.path.basename(event.src_path).startswith(\".\"):\n            return  # Ignore les dossiers et fichiers cachés\n        file_path = event.src_path",
+        "peekOfCode": "class GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n    def on_any_event(self, event):\n        \"\"\"Gère tous les événements (création, modification, suppression, déplacement).\"\"\"",
+        "detail": "git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "parse_arguments",
+        "kind": 2,
+        "importPath": "git_observer.watcher",
+        "description": "git_observer.watcher",
+        "peekOfCode": "def parse_arguments():\n    \"\"\"Analyse les arguments CLI pour configurer le comportement.\"\"\"\n    parser = argparse.ArgumentParser(description=\"Surveille un dossier et effectue des commits automatiques.\")\n    parser.add_argument(\"--mode\", type=str, choices=[MODE_AUTO, MODE_PATTERN], default=MODE_AUTO, help=\"Mode d'exécution : 'auto' (par défaut) ou 'pattern'\")\n    parser.add_argument(\"--delay\", type=int, default=30, help=\"Délai en secondes pour le commit automatique (mode auto).\")\n    parser.add_argument(\"--message\", type=str, default=\"Mise à jour automatique\", help=\"Message de commit par défaut.\")\n    return parser.parse_args()\n# if __name__ == \"__main__\":\n#     args = parse_arguments()\n#     print(f\"{Fore.GREEN}🚀 Mode : {args.mode}, Delay : {args.delay}s, Message : {args.message}{Style.RESET_ALL}\")",
         "detail": "git_observer.watcher",
         "documentation": {}
     },
@@ -268,7 +225,34 @@
         "kind": 2,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "def start_watcher():\n    \"\"\"Démarre la surveillance du dossier\"\"\"\n    watched_dir = get_current_directory()\n    print(f\"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}\")\n    event_handler = GitAutoCommitHandler()\n    observer = Observer()\n    observer.schedule(event_handler, watched_dir, recursive=True)\n    try:\n        observer.start()\n        while True:",
+        "peekOfCode": "def start_watcher():\n    \"\"\"Démarre la surveillance du dossier\"\"\"\n    args = parse_arguments()\n    print(f\"{Fore.GREEN}🚀 Mode : {args.mode}, Delay : {args.delay}s, Message : {args.message}{Style.RESET_ALL}\")\n    watched_dir = get_current_directory()\n    print(f\"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}\")\n    event_handler = GitAutoCommitHandler(mode=args.mode, commit_delay=args.delay, default_message=args.message)\n    # event_handler = GitAutoCommitHandler()\n    observer = Observer()\n    observer.schedule(event_handler, watched_dir, recursive=True)",
+        "detail": "git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "MODE_AUTO",
+        "kind": 5,
+        "importPath": "git_observer.watcher",
+        "description": "git_observer.watcher",
+        "peekOfCode": "MODE_AUTO = \"auto\"\nMODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay",
+        "detail": "git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "MODE_PATTERN",
+        "kind": 5,
+        "importPath": "git_observer.watcher",
+        "description": "git_observer.watcher",
+        "peekOfCode": "MODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message",
+        "detail": "git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "MODIFIED_FILES",
+        "kind": 5,
+        "importPath": "git_observer.watcher",
+        "description": "git_observer.watcher",
+        "peekOfCode": "MODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n    def on_any_event(self, event):",
         "detail": "git_observer.watcher",
         "documentation": {}
     }
