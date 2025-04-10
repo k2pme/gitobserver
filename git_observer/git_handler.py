@@ -35,5 +35,7 @@ class GitHandler:
 
 
             print(f"{Fore.GREEN}✅ Commit et push réussi : {commit_message}{Style.RESET_ALL}")
+            return
+        
         except subprocess.CalledProcessError as e:
             print(f"{Fore.RED}❌ Erreur Git : {e}{Style.RESET_ALL}")

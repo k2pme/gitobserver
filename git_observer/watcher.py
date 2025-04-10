@@ -131,6 +131,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         GitHandler.git_commit_push(commit_message)
         MODIFIED_FILES.clear()
         self.last_commit_time = time.time()
+        return
 
 
     def generate_commit_message(self):
