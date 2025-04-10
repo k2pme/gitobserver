@@ -132,17 +132,17 @@ class GitAutoCommitHandler(FileSystemEventHandler):
     def execute_commit(self):
         """Exécute le commit et vide la liste des fichiers modifiés."""
     
-        # status_output = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True).stdout.strip()
+        status_output = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True).stdout.strip()
         
-        # if not status_output:
+        if not status_output:
             
-        #     print(f"{Fore.YELLOW}⚠️ Aucun changement détecté, rien à commit.{Style.RESET_ALL}")
-        #     MODIFIED_FILES.clear()
-        #     return
+            print(f"{Fore.YELLOW}⚠️ Aucun changement détecté, rien à commit.{Style.RESET_ALL}")
+            MODIFIED_FILES.clear()
+            return
         
         commit_message = self.default_message if self.default_message else self.generate_commit_message()
     
-    
+
         GitHandler.git_commit_push(commit_message)
         MODIFIED_FILES.clear()
         self.last_commit_time = time.time()
