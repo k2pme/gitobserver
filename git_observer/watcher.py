@@ -139,7 +139,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             print(f"{Fore.YELLOW}⚠️ Aucun changement détecté, rien à commit.{Style.RESET_ALL}")
             MODIFIED_FILES.clear()
             return
-        
+    
         commit_message = self.default_message if self.default_message else self.generate_commit_message()
     
 
