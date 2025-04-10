@@ -276,7 +276,7 @@
         "kind": 6,
         "importPath": "git_observer.git_handler",
         "description": "git_observer.git_handler",
-        "peekOfCode": "class GitHandler:\n    \"\"\"Gère les interactions avec Git\"\"\"\n    @staticmethod\n    def extract_commit_message(file_path):\n        \"\"\"Cherche une ligne contenant commit_name=\"message\" et retourne le message.\"\"\"\n       print()\n        try:\n            with open(file_path, \"r\", encoding=\"utf-8\") as f:\n                for line in f:\n                    if \"commit_name=\" in line:",
+        "peekOfCode": "class GitHandler:\n    \"\"\"Gère les interactions avec Git\"\"\"\n    @staticmethod\n    def extract_commit_message(file_path):\n        \"\"\"Cherche une ligne contenant commit_name=\"message\" et retourne le message.\"\"\"\n       print(file_pq)\n        try:\n            with open(file_path, \"r\", encoding=\"utf-8\") as f:\n                for line in f:\n                    if \"commit_name=\" in line:",
         "detail": "git_observer.git_handler",
         "documentation": {}
     },
