@@ -64,13 +64,13 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             
             with open(file_path, "rb") as f:
                 file_hash = hashlib.sha256(f.read()).hexdigest()
-                
+            
                 print(f"{Fore.LIGHTBLACK_EX}🔍 Comparaison hash pour {file_path} : {file_hash[:8]}...{Style.RESET_ALL}")
                 
             previous_hash = FILE_HASHES.get(file_path, None)
             
             if file_hash != previous_hash:
-                MODIFIED_FILES[file_path] = file_hash
+                FILE_HASHES[file_path] = file_hash
                 return True
             
         except Exception as e:
