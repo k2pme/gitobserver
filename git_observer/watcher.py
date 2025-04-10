@@ -15,6 +15,7 @@ MODE_PATTERN = "pattern"
 
 # Liste des fichiers modifiés
 MODIFIED_FILES = {}
+FILE_HASHES = {}
 
 class GitAutoCommitHandler(FileSystemEventHandler):
     """Surveille les fichiers et déclenche des commits automatiques ou sur modification."""
@@ -55,14 +56,18 @@ class GitAutoCommitHandler(FileSystemEventHandler):
 
     def is_file_modified(self, file_path):
         """Vérifie si un fichier a réellement changé en comparant son hash."""
+        
         if not os.path.exists(file_path):
             return False
 
         try:
+            
             with open(file_path, "rb") as f:
                 file_hash = hashlib.sha256(f.read()).hexdigest()
-
-            previous_hash = MODIFIED_FILES.get(file_path, None)
+                
+                print(f"{Fore.LIGHTBLACK_EX}🔍 Comparaison hash pour {file_path} : {file_hash[:8]}...{Style.RESET_ALL}")
+                
+            previous_hash = FILE_HASHES.get(file_path, None)
             
             if file_hash != previous_hash:
                 MODIFIED_FILES[file_path] = file_hash

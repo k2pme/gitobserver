@@ -312,7 +312,7 @@
         "kind": 5,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "MODE_AUTO = \"auto\"\nMODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay",
+        "peekOfCode": "MODE_AUTO = \"auto\"\nMODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode",
         "detail": "git_observer.watcher",
         "documentation": {}
     },
@@ -321,7 +321,7 @@
         "kind": 5,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "MODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message",
+        "peekOfCode": "MODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay",
         "detail": "git_observer.watcher",
         "documentation": {}
     },
@@ -330,7 +330,16 @@
         "kind": 5,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "MODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n    def on_any_event(self, event):",
+        "peekOfCode": "MODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()",
+        "detail": "git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "FILE_HASHES",
+        "kind": 5,
+        "importPath": "git_observer.watcher",
+        "description": "git_observer.watcher",
+        "peekOfCode": "FILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n    def on_any_event(self, event):",
         "detail": "git_observer.watcher",
         "documentation": {}
     }
