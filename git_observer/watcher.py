@@ -173,7 +173,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Surveille un dossier et effectue des commits automatiques.")
     parser.add_argument("--mode", type=str, choices=[MODE_AUTO, MODE_PATTERN], default=MODE_AUTO, help="Mode d'exécution : 'auto' (par défaut) ou 'pattern'")
     parser.add_argument("--delay", type=int, default=30, help="Délai en secondes pour le commit automatique (mode auto).")
-    parser.add_argument("--message", type=str, default="Mise à jour automatique", help="Message de commit par défaut.")
+    parser.add_argument("--message", type=str, default="Auto update", help="Message de commit par défaut.")
 
     return parser.parse_args()
 
