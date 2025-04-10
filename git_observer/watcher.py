@@ -60,7 +60,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         
         if not os.path.exists(file_path):
             return False
-
+        
         try:
             
             with open(file_path, "rb") as f:
@@ -102,12 +102,12 @@ class GitAutoCommitHandler(FileSystemEventHandler):
 
         # Fonction pour commit auto après timeout
         def auto_commit():
-            
+        
             print(f"\n{Fore.YELLOW}⏳ Temps écoulé. Commit automatique en cours...{Style.RESET_ALL}")
             self.execute_commit()
-
+            
         # Démarrer un timer de 2 minutes (120 secondes)
-        timer = threading.Timer(120, auto_commit)
+        timer = threading.Timer(10, lambda: self.execute_commit())
         timer.start()
 
         try:
