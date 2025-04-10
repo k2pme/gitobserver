@@ -65,6 +65,62 @@
         "documentation": {}
     },
     {
+        "label": "Fore",
+        "importPath": "colorama",
+        "description": "colorama",
+        "isExtraImport": true,
+        "detail": "colorama",
+        "documentation": {}
+    },
+    {
+        "label": "Style",
+        "importPath": "colorama",
+        "description": "colorama",
+        "isExtraImport": true,
+        "detail": "colorama",
+        "documentation": {}
+    },
+    {
+        "label": "init",
+        "importPath": "colorama",
+        "description": "colorama",
+        "isExtraImport": true,
+        "detail": "colorama",
+        "documentation": {}
+    },
+    {
+        "label": "Fore",
+        "importPath": "colorama",
+        "description": "colorama",
+        "isExtraImport": true,
+        "detail": "colorama",
+        "documentation": {}
+    },
+    {
+        "label": "Style",
+        "importPath": "colorama",
+        "description": "colorama",
+        "isExtraImport": true,
+        "detail": "colorama",
+        "documentation": {}
+    },
+    {
+        "label": "Fore",
+        "importPath": "colorama",
+        "description": "colorama",
+        "isExtraImport": true,
+        "detail": "colorama",
+        "documentation": {}
+    },
+    {
+        "label": "Style",
+        "importPath": "colorama",
+        "description": "colorama",
+        "isExtraImport": true,
+        "detail": "colorama",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -105,6 +161,38 @@
         "description": "watchdog.observers",
         "isExtraImport": true,
         "detail": "watchdog.observers",
+        "documentation": {}
+    },
+    {
+        "label": "Observer",
+        "importPath": "watchdog.observers",
+        "description": "watchdog.observers",
+        "isExtraImport": true,
+        "detail": "watchdog.observers",
+        "documentation": {}
+    },
+    {
+        "label": "Observer",
+        "importPath": "watchdog.observers",
+        "description": "watchdog.observers",
+        "isExtraImport": true,
+        "detail": "watchdog.observers",
+        "documentation": {}
+    },
+    {
+        "label": "FileSystemEventHandler",
+        "importPath": "watchdog.events",
+        "description": "watchdog.events",
+        "isExtraImport": true,
+        "detail": "watchdog.events",
+        "documentation": {}
+    },
+    {
+        "label": "FileSystemEventHandler",
+        "importPath": "watchdog.events",
+        "description": "watchdog.events",
+        "isExtraImport": true,
+        "detail": "watchdog.events",
         "documentation": {}
     },
     {
@@ -164,6 +252,96 @@
         "description": "setuptools",
         "isExtraImport": true,
         "detail": "setuptools",
+        "documentation": {}
+    },
+    {
+        "label": "GitHandler",
+        "kind": 6,
+        "importPath": "build.lib.git_observer.git_handler",
+        "description": "build.lib.git_observer.git_handler",
+        "peekOfCode": "class GitHandler:\n    \"\"\"Gère les interactions avec Git\"\"\"\n    @staticmethod\n    def extract_commit_message(file_path):\n        \"\"\"Cherche une ligne contenant commit_name=\"message\" et retourne le message.\"\"\"\n        try:\n            with open(file_path, \"r\", encoding=\"utf-8\") as f:\n                for line in f:\n                    if \"commit_name=\" in line:\n                        parts = line.split(\"commit_name=\", 1)",
+        "detail": "build.lib.git_observer.git_handler",
+        "documentation": {}
+    },
+    {
+        "label": "get_current_directory",
+        "kind": 2,
+        "importPath": "build.lib.git_observer.utils",
+        "description": "build.lib.git_observer.utils",
+        "peekOfCode": "def get_current_directory():\n    \"\"\"Récupération du dossier courant (compatible Linux & Windows)\"\"\"\n    return os.getcwd() if platform.system() == \"Windows\" else subprocess.run([\"pwd\"], capture_output=True, text=True).stdout.strip()",
+        "detail": "build.lib.git_observer.utils",
+        "documentation": {}
+    },
+    {
+        "label": "GitAutoCommitHandler",
+        "kind": 6,
+        "importPath": "build.lib.git_observer.watcher.copy",
+        "description": "build.lib.git_observer.watcher.copy",
+        "peekOfCode": "class GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Classe qui écoute les modifications et pousse les commits automatiquement.\"\"\"\n    def __init__(self):\n        super().__init__()\n        self.git_handler = GitHandler()\n    def on_modified(self, event):\n        \"\"\"Déclenché lorsqu'un fichier est modifié.\"\"\"\n        if event.is_directory or any(excluded in event.src_path for excluded in [\".git\", \"node_modules\"]) or os.path.basename(event.src_path).startswith(\".\"):\n            return  # Ignore les dossiers et fichiers cachés\n        file_path = event.src_path",
+        "detail": "build.lib.git_observer.watcher.copy",
+        "documentation": {}
+    },
+    {
+        "label": "start_watcher",
+        "kind": 2,
+        "importPath": "build.lib.git_observer.watcher.copy",
+        "description": "build.lib.git_observer.watcher.copy",
+        "peekOfCode": "def start_watcher():\n    \"\"\"Démarre la surveillance du dossier\"\"\"\n    watched_dir = get_current_directory()\n    print(f\"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}\")\n    event_handler = GitAutoCommitHandler()\n    observer = Observer()\n    observer.schedule(event_handler, watched_dir, recursive=True)\n    try:\n        observer.start()\n        while True:",
+        "detail": "build.lib.git_observer.watcher.copy",
+        "documentation": {}
+    },
+    {
+        "label": "GitAutoCommitHandler",
+        "kind": 6,
+        "importPath": "build.lib.git_observer.watcher",
+        "description": "build.lib.git_observer.watcher",
+        "peekOfCode": "class GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n    def on_any_event(self, event):\n        \"\"\"Gère tous les événements (création, modification, suppression, déplacement).\"\"\"",
+        "detail": "build.lib.git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "parse_arguments",
+        "kind": 2,
+        "importPath": "build.lib.git_observer.watcher",
+        "description": "build.lib.git_observer.watcher",
+        "peekOfCode": "def parse_arguments():\n    \"\"\"Analyse les arguments CLI pour configurer le comportement.\"\"\"\n    parser = argparse.ArgumentParser(description=\"Surveille un dossier et effectue des commits automatiques.\")\n    parser.add_argument(\"--mode\", type=str, choices=[MODE_AUTO, MODE_PATTERN], default=MODE_AUTO, help=\"Mode d'exécution : 'auto' (par défaut) ou 'pattern'\")\n    parser.add_argument(\"--delay\", type=int, default=30, help=\"Délai en secondes pour le commit automatique (mode auto).\")\n    parser.add_argument(\"--message\", type=str, default=\"Mise à jour automatique\", help=\"Message de commit par défaut.\")\n    return parser.parse_args()\n# if __name__ == \"__main__\":\n#     args = parse_arguments()\n#     print(f\"{Fore.GREEN}🚀 Mode : {args.mode}, Delay : {args.delay}s, Message : {args.message}{Style.RESET_ALL}\")",
+        "detail": "build.lib.git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "start_watcher",
+        "kind": 2,
+        "importPath": "build.lib.git_observer.watcher",
+        "description": "build.lib.git_observer.watcher",
+        "peekOfCode": "def start_watcher():\n    \"\"\"Démarre la surveillance du dossier\"\"\"\n    args = parse_arguments()\n    print(f\"{Fore.GREEN}🚀 Mode : {args.mode}, Delay : {args.delay}s, Message : {args.message}{Style.RESET_ALL}\")\n    watched_dir = get_current_directory()\n    print(f\"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}\")\n    event_handler = GitAutoCommitHandler(mode=args.mode, commit_delay=args.delay, default_message=args.message)\n    # event_handler = GitAutoCommitHandler()\n    observer = Observer()\n    observer.schedule(event_handler, watched_dir, recursive=True)",
+        "detail": "build.lib.git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "MODE_AUTO",
+        "kind": 5,
+        "importPath": "build.lib.git_observer.watcher",
+        "description": "build.lib.git_observer.watcher",
+        "peekOfCode": "MODE_AUTO = \"auto\"\nMODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay",
+        "detail": "build.lib.git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "MODE_PATTERN",
+        "kind": 5,
+        "importPath": "build.lib.git_observer.watcher",
+        "description": "build.lib.git_observer.watcher",
+        "peekOfCode": "MODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message",
+        "detail": "build.lib.git_observer.watcher",
+        "documentation": {}
+    },
+    {
+        "label": "MODIFIED_FILES",
+        "kind": 5,
+        "importPath": "build.lib.git_observer.watcher",
+        "description": "build.lib.git_observer.watcher",
+        "peekOfCode": "MODIFIED_FILES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n    def on_any_event(self, event):",
+        "detail": "build.lib.git_observer.watcher",
         "documentation": {}
     },
     {
