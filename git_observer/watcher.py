@@ -55,7 +55,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             commit_message = GitHandler.extract_commit_message(file_path)
             
             if commit_message:
-            
+        
                 GitHandler.git_commit_push(commit_message)
                 # self.commit_now()
 
