@@ -34,7 +34,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         
         if event.is_directory or ".git" in event.src_path or os.path.basename(event.src_path).startswith("."):
             return
-
+        
         event_type = event.event_type
         file_path = event.src_path
 
