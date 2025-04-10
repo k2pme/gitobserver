@@ -1,9 +1,18 @@
-# Git Auto Commit
+# 🧠 GitObserver – Intelligent Auto Commit Tool
 
-## 📌 Introduction
-Git Auto Commit is a tool that automatically commits modified files with a confirmation prompt. If no response is given within 2 minutes, the commit is executed automatically.
+GitObserver is an intelligent file monitoring and auto-committing tool for Git repositories. It watches your working directory for file changes and can commit them automatically or after confirmation. It’s perfect for developers who want real-time, stress-free version tracking while coding.
 
-This tool is useful for developers who frequently modify files and want to ensure their changes are committed regularly without manual intervention.
+---
+
+## 🚀 Features
+
+- 🔄 **Automatic Git Commits**: Detects file changes and commits after a configurable delay.
+- 🧠 **Pattern Mode**: Only commits on file modification events.
+- 🕒 **Commit Timeout**: Prompts the user for confirmation; if no response within 2 minutes, commits automatically.
+- 📑 **Change Summary**: Includes detailed commit messages listing added, modified, and deleted files.
+- 🧰 **Lightweight & Customizable**: Easy CLI configuration with delay, message, and mode options.
+- 🔒 **Hash-Based Change Detection**: Avoids false positives by verifying content changes via SHA-256 hash.
+- 🛠️ **Modular Design**: Easy to extend with pluggable git and utility modules.
 
 ---
 
@@ -43,6 +52,41 @@ Once the package is published on PyPI:
 ```bash
 pip install gitobserver
 git_observer
+```
+
+---
+## ✅ Available Options
+
+| args       | description                            | deault         |
+|:-----------|:--------------------------------------:|---------------:|
+| --mode     | `auto` or `pattern`                    | auto           |
+| --delay    | Time in seconds before auto-committing	| 30             |
+| --message  | Default commit message	               | Auto update    |
+
+
+### 📜 Commit Modes
+- *Auto Mode* : Commits all detected changes after the delay.
+- *Pattern Mode* : Commits immediately on file modification events only.
+
+
+
+---
+
+## 🧪 Usage
+### 🛡️ Start Watching Your Folder
+
+```bash
+python3 -m git_observer.main --mode auto --delay 30 --message "Auto update"
+
+```
+
+### 📦 Example Commit Output
+
+```bash
+📝 Files to commit:
+  - main.py
+  - git_handler.py
+⏳ Waiting for confirmation... (120s timeout)
 ```
 
 ---
