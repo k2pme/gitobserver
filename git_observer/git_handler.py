@@ -7,7 +7,7 @@ class GitHandler:
     @staticmethod
     def extract_commit_message(file_path):
         """Cherche une ligne contenant commit_name="message" et retourne le message."""
-       printf
+       printf()
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 for line in f:
