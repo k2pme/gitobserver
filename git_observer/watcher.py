@@ -52,7 +52,12 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             self.try_commit()
             
         elif self.mode == MODE_PATTERN and event_type == "modified":
-            self.commit_now()
+            commit_message = GitHandler.extract_commit_message(file_path)
+            
+            if commit_message:
+            
+                GitHandler.git_commit_push(commit_message)
+                # self.commit_now()
 
 
     def is_file_modified(self, file_path):
@@ -102,12 +107,12 @@ class GitAutoCommitHandler(FileSystemEventHandler):
 
         # Fonction pour commit auto après timeout
         def auto_commit():
-        
+            
             print(f"\n{Fore.YELLOW}⏳ Temps écoulé. Commit automatique en cours...{Style.RESET_ALL}")
             self.execute_commit()
-            
+
         # Démarrer un timer de 2 minutes (120 secondes)
-        timer = threading.Timer(10, lambda: self.execute_commit())
+        timer = threading.Timer(120, auto_commit)
         timer.start()
 
         try:
