@@ -19,7 +19,6 @@ MODIFIED_FILES = {}
 class GitAutoCommitHandler(FileSystemEventHandler):
     """Surveille les fichiers et déclenche des commits automatiques ou sur modification."""
     
-    
     def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message="Mise à jour automatique"):
         super().__init__()
         self.mode = mode
@@ -49,6 +48,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         # Appliquer le mode choisi
         if self.mode == MODE_AUTO:
             self.try_commit()
+            
         elif self.mode == MODE_PATTERN and event_type == "modified":
             self.commit_now()
 
@@ -76,8 +76,11 @@ class GitAutoCommitHandler(FileSystemEventHandler):
 
     def try_commit(self):
         """Vérifie s'il est temps de faire un commit groupé."""
+        
         current_time = time.time()
+        
         if (current_time - self.last_commit_time) > self.commit_delay and MODIFIED_FILES:
+            
             self.commit_now()
 
 
@@ -110,7 +113,6 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             
             print(f"\n{Fore.YELLOW}⏳ Temps écoulé. Commit automatique en cours...{Style.RESET_ALL}")
             self.execute_commit()
-            return
 
         if confirmation == "o":
             
