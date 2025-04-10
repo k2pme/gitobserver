@@ -141,7 +141,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             return
         
         commit_message = self.default_message if self.default_message else self.generate_commit_message()
-        
+    
         GitHandler.git_commit_push(commit_message)
         MODIFIED_FILES.clear()
         self.last_commit_time = time.time()
