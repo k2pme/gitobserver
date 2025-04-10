@@ -93,6 +93,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
 
         # Fonction pour commit auto après timeout
         def auto_commit():
+            
             print(f"\n{Fore.YELLOW}⏳ Temps écoulé. Commit automatique en cours...{Style.RESET_ALL}")
             self.execute_commit()
 
@@ -101,16 +102,22 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         timer.start()
 
         try:
+            
             confirmation = input(f"{Fore.YELLOW}Confirmer le commit ? (o/N) {Style.RESET_ALL}").strip().lower()
             timer.cancel()  # Annuler le timer si l'utilisateur répond avant les 2 minutes
+            
         except KeyboardInterrupt:
+            
             print(f"\n{Fore.YELLOW}⏳ Temps écoulé. Commit automatique en cours...{Style.RESET_ALL}")
             self.execute_commit()
             return
 
         if confirmation == "o":
+            
             self.execute_commit()
+            
         else:
+            
             print(f"{Fore.RED}🚫 Commit annulé.{Style.RESET_ALL}")
 
 
