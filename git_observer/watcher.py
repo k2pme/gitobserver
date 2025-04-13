@@ -134,7 +134,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         
         if confirmation_result["value"] == "o":
             self.execute_commit()
-            
+        
         elif confirmation_result["value"] is None:
             print(f"\n{Fore.YELLOW}⏳ Temps écoulé. Commit automatique en cours...{Style.RESET_ALL}")
             self.execute_commit()

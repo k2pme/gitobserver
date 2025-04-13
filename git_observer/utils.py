@@ -6,6 +6,7 @@ from colorama import init
 
 # 🖌️ Initialisation de Colorama pour Windows
 init(autoreset=True)
+FILE_NAME = "observer.config.json"
 
 def get_current_directory():
     """Récupération du dossier courant (compatible Linux & Windows)"""
@@ -13,7 +14,7 @@ def get_current_directory():
 
 
 
-def init_and_load_config(filename="observer.config.json"):
+def init_and_load_config(filename=FILE_NAME):
     """Crée le fichier config s'il n'existe pas et retourne son contenu"""
     
     default_config = {
@@ -40,7 +41,7 @@ def init_and_load_config(filename="observer.config.json"):
 
 
 
-def read_config(filename="config.json"):
+def read_config(filename=FILE_NAME):
     """Lit le fichier config et retourne son contenu en dict"""
     config_path = os.path.join(get_current_directory(), filename)
 
@@ -49,3 +50,4 @@ def read_config(filename="config.json"):
 
     with open(config_path, "r") as f:
         return json.load(f)
+    

@@ -310,7 +310,7 @@
         "kind": 2,
         "importPath": "git_observer.utils",
         "description": "git_observer.utils",
-        "peekOfCode": "def get_current_directory():\n    \"\"\"Récupération du dossier courant (compatible Linux & Windows)\"\"\"\n    return os.getcwd() if platform.system() == \"Windows\" else subprocess.run([\"pwd\"], capture_output=True, text=True).stdout.strip()\ndef init_and_load_config(filename=\"observer.config.json\"):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"commit_name=\",\n        \"response_delay\": 2,\n        \"max_files\": 10,",
+        "peekOfCode": "def get_current_directory():\n    \"\"\"Récupération du dossier courant (compatible Linux & Windows)\"\"\"\n    return os.getcwd() if platform.system() == \"Windows\" else subprocess.run([\"pwd\"], capture_output=True, text=True).stdout.strip()\ndef init_and_load_config(filename=FILE_NAME):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"commit_name=\",\n        \"response_delay\": 2,\n        \"max_files\": 10,",
         "detail": "git_observer.utils",
         "documentation": {}
     },
@@ -319,7 +319,7 @@
         "kind": 2,
         "importPath": "git_observer.utils",
         "description": "git_observer.utils",
-        "peekOfCode": "def init_and_load_config(filename=\"observer.config.json\"):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"commit_name=\",\n        \"response_delay\": 2,\n        \"max_files\": 10,\n        \"commit_message\": \"auto commit\",\n    }\n    config_path = os.path.join(get_current_directory(), filename)",
+        "peekOfCode": "def init_and_load_config(filename=FILE_NAME):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"commit_name=\",\n        \"response_delay\": 2,\n        \"max_files\": 10,\n        \"commit_message\": \"auto commit\",\n    }\n    config_path = os.path.join(get_current_directory(), filename)",
         "detail": "git_observer.utils",
         "documentation": {}
     },
@@ -328,7 +328,16 @@
         "kind": 2,
         "importPath": "git_observer.utils",
         "description": "git_observer.utils",
-        "peekOfCode": "def read_config(filename=\"config.json\"):\n    \"\"\"Lit le fichier config et retourne son contenu en dict\"\"\"\n    config_path = os.path.join(get_current_directory(), filename)\n    if not os.path.exists(config_path):\n        raise FileNotFoundError(f\"Le fichier {filename} est introuvable à la racine du projet.\")\n    with open(config_path, \"r\") as f:\n        return json.load(f)",
+        "peekOfCode": "def read_config(filename=FILE_NAME):\n    \"\"\"Lit le fichier config et retourne son contenu en dict\"\"\"\n    config_path = os.path.join(get_current_directory(), filename)\n    if not os.path.exists(config_path):\n        raise FileNotFoundError(f\"Le fichier {filename} est introuvable à la racine du projet.\")\n    with open(config_path, \"r\") as f:\n        return json.load(f)",
+        "detail": "git_observer.utils",
+        "documentation": {}
+    },
+    {
+        "label": "FILE_NAME",
+        "kind": 5,
+        "importPath": "git_observer.utils",
+        "description": "git_observer.utils",
+        "peekOfCode": "FILE_NAME = \"observer.config.json\"\ndef get_current_directory():\n    \"\"\"Récupération du dossier courant (compatible Linux & Windows)\"\"\"\n    return os.getcwd() if platform.system() == \"Windows\" else subprocess.run([\"pwd\"], capture_output=True, text=True).stdout.strip()\ndef init_and_load_config(filename=FILE_NAME):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"commit_name=\",\n        \"response_delay\": 2,",
         "detail": "git_observer.utils",
         "documentation": {}
     },
