@@ -155,7 +155,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             MODIFIED_FILES.clear()
             return
     
-        
+        if()
         commit_message = self.default_message if self.default_message else self.generate_commit_message()
     
     
