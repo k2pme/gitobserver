@@ -101,7 +101,6 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             
             self.commit_now()
 
-
     def commit_now(self):
         """Effectue un commit immédiat avec confirmation, avec un timeout de 2 minutes."""
         
