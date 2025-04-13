@@ -6,7 +6,7 @@ import hashlib
 from watchdog.events import FileSystemEventHandler
 from colorama import Fore, Style
 from .git_handler import GitHandler
-from .utils import get_current_directory
+from .utils import get_current_directory, init_and_load_config
 from watchdog.observers import Observer
 import threading
 
@@ -27,6 +27,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         self.commit_delay = commit_delay
         self.default_message = default_message
         self.last_commit_time = time.time()
+        self.config = init_and_load_config()
 
 
     def on_any_event(self, event):
