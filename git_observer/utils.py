@@ -20,6 +20,7 @@ def init_and_load_config(filename="observer.config.json"):
         "commit_delay": 5,
         "commit_patern": "feat: auto commit",
         "response_delay": 2
+        "max_"
     }
 
     config_path = os.path.join(get_current_directory(), filename)
