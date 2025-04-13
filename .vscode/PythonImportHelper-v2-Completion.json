@@ -339,7 +339,7 @@
         "kind": 2,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "def start_watcher():\n    \"\"\"Démarre la surveillance du dossier\"\"\"\n    args = parse_arguments()\n    print(f\"{Fore.GREEN}🚀 Mode : {args.mode}, Delay : {args.delay}s, Message : {args.message}{Style.RESET_ALL}\")\n    watched_dir = get_current_directory()\n    print(f\"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}\")\n    event_handler = GitAutoCommitHandler(mode=args.mode)\n    # event_handler = GitAutoCommitHandler()\n    observer = Observer()\n    observer.schedule(event_handler, watched_dir, recursive=True)",
+        "peekOfCode": "def start_watcher():\n    \"\"\"Démarre la surveillance du dossier\"\"\"\n    args = parse_arguments()\n    print(f\"{Fore.GREEN}🚀 Mode : {args.mode} {Style.RESET_ALL}\")\n    watched_dir = get_current_directory()\n    print(f\"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}\")\n    event_handler = GitAutoCommitHandler(mode=args.mode)\n    # event_handler = GitAutoCommitHandler()\n    observer = Observer()\n    observer.schedule(event_handler, watched_dir, recursive=True)",
         "detail": "git_observer.watcher",
         "documentation": {}
     },

@@ -131,7 +131,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         input_thread.daemon = True
         input_thread.start()
 
-        input_thread.join(timeout=120)  # attend max 2 min
+        input_thread.join(timeout=self.commit_delay)  # attend max 2 min
 
         if confirmation_result["value"] == "o":
             self.execute_commit()
@@ -197,8 +197,8 @@ def start_watcher():
     """Démarre la surveillance du dossier"""
     
     args = parse_arguments()
-    print(f"{Fore.GREEN}🚀 Mode : {args.mode}, Delay : {args.delay}s, Message : {args.message}{Style.RESET_ALL}")
-
+    print(f"{Fore.GREEN}🚀 Mode : {args.mode} {Style.RESET_ALL}")
+    
     watched_dir = get_current_directory()
     print(f"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}")
 
