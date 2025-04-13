@@ -95,7 +95,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
     def try_commit(self):
         """Vérifie s'il est temps de faire un commit groupé."""
         
-        con_any_eventurrent_time = time.time()
+        current_time = time.time()
         
         if (current_time - self.last_commit_time) > self.commit_delay and MODIFIED_FILES:
             
