@@ -28,7 +28,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         self.last_commit_time = time.time()
         self.config = init_and_load_config()
         
-        self.default_message = self.config['commit_message']
+        self.default_message = str(self.config['commit_message'])
         self.commit_delay = int(self.config['commit_delay'])
         self.commit_patern = self.config['commit_patern']
         self.response_delay = self.config['response_delay']
