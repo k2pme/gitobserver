@@ -29,10 +29,10 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         self.last_commit_time = time.time()
         self.config = init_and_load_config()
         
-        self.commit_delay = self.config['commit_delay'] if self.config.get('commit_delay') else 5
-        self.commit_patern = self.config['commit_patern'] if self.config.get('commit_patern') else "feat: auto commit"
-        self.response_delay = self.config['response_delay'] if self.config.get('response_delay') else 2
-        self.max_files = self.config['max_files'] if self.config.get('max_files') else 10,
+        self.commit_delay = self.config['commit_delay']
+        self.commit_patern = self.config['commit_patern']
+        self.response_delay = self.config['response_delay']
+        self.max_files = self.config['max_files']
         
 
 
@@ -187,8 +187,8 @@ def parse_arguments():
     """Analyse les arguments CLI pour configurer le comportement."""
     parser = argparse.ArgumentParser(description="Surveille un dossier et effectue des commits automatiques.")
     parser.add_argument("--mode", type=str, choices=[MODE_AUTO, MODE_PATTERN], default=MODE_AUTO, help="Mode d'exécution : 'auto' (par défaut) ou 'pattern'")
-    parser.add_argument("--delay", type=int, default=30, help="Délai en secondes pour le commit automatique (mode auto).")
-    parser.add_argument("--message", type=str, default="Auto update", help="Message de commit par défaut.")
+    # parser.add_argument("--delay", type=int, default=30, help="Délai en secondes pour le commit automatique (mode auto).")
+    # parser.add_argument("--message", type=str, default="Auto update", help="Message de commit par défaut.")
 
     return parser.parse_args()
 
@@ -202,7 +202,7 @@ def start_watcher():
     watched_dir = get_current_directory()
     print(f"{Fore.MAGENTA}👀 Surveillance du dossier : {watched_dir}{Style.RESET_ALL}")
 
-    event_handler = GitAutoCommitHandler(mode=args.mode, commit_delay=args.delay, default_message=args.message)
+    event_handler = GitAutoCommitHandler(mode=args.mode)
     # event_handler = GitAutoCommitHandler()
     
     observer = Observer()
