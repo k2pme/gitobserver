@@ -21,14 +21,14 @@ FILE_HASHES = {}
 class GitAutoCommitHandler(FileSystemEventHandler):
     """Surveille les fichiers et déclenche des commits automatiques ou sur modification."""
     
-    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message="Mise à jour automatique"):
+    def __init__(self, mode=MODE_AUTO):
         super().__init__()
         self.mode = mode
         # self.commit_delay = commit_delay
-        self.default_message = default_message
         self.last_commit_time = time.time()
         self.config = init_and_load_config()
         
+        self.default_message = self.config['commit_message']
         self.commit_delay = self.config['commit_delay']
         self.commit_patern = self.config['commit_patern']
         self.response_delay = self.config['response_delay']

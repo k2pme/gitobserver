@@ -294,7 +294,7 @@
         "kind": 2,
         "importPath": "git_observer.utils",
         "description": "git_observer.utils",
-        "peekOfCode": "def get_current_directory():\n    \"\"\"Récupération du dossier courant (compatible Linux & Windows)\"\"\"\n    return os.getcwd() if platform.system() == \"Windows\" else subprocess.run([\"pwd\"], capture_output=True, text=True).stdout.strip()\ndef init_and_load_config(filename=\"observer.config.json\"):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"feat: auto commit\",\n        \"response_delay\": 2,\n        \"max_files\": 10,",
+        "peekOfCode": "def get_current_directory():\n    \"\"\"Récupération du dossier courant (compatible Linux & Windows)\"\"\"\n    return os.getcwd() if platform.system() == \"Windows\" else subprocess.run([\"pwd\"], capture_output=True, text=True).stdout.strip()\ndef init_and_load_config(filename=\"observer.config.json\"):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"commit_name=\",\n        \"response_delay\": 2,\n        \"max_files\": 10,",
         "detail": "git_observer.utils",
         "documentation": {}
     },
@@ -303,7 +303,7 @@
         "kind": 2,
         "importPath": "git_observer.utils",
         "description": "git_observer.utils",
-        "peekOfCode": "def init_and_load_config(filename=\"observer.config.json\"):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"feat: auto commit\",\n        \"response_delay\": 2,\n        \"max_files\": 10,\n    }\n    config_path = os.path.join(get_current_directory(), filename)\n    # Créer le fichier si inexistant",
+        "peekOfCode": "def init_and_load_config(filename=\"observer.config.json\"):\n    \"\"\"Crée le fichier config s'il n'existe pas et retourne son contenu\"\"\"\n    default_config = {\n        \"commit_delay\": 5,\n        \"commit_patern\": \"commit_name=\",\n        \"response_delay\": 2,\n        \"max_files\": 10,\n        \"commit_message\": \"auto commit\",\n    }\n    config_path = os.path.join(get_current_directory(), filename)",
         "detail": "git_observer.utils",
         "documentation": {}
     },
@@ -321,7 +321,7 @@
         "kind": 6,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "class GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        # self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n        self.config = init_and_load_config()\n        self.commit_delay = self.config['commit_delay']",
+        "peekOfCode": "class GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO):\n        super().__init__()\n        self.mode = mode\n        # self.commit_delay = commit_delay\n        self.last_commit_time = time.time()\n        self.config = init_and_load_config()\n        self.default_message = self.config['commit_message']\n        self.commit_delay = self.config['commit_delay']",
         "detail": "git_observer.watcher",
         "documentation": {}
     },
@@ -348,7 +348,7 @@
         "kind": 5,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "MODE_AUTO = \"auto\"\nMODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode",
+        "peekOfCode": "MODE_AUTO = \"auto\"\nMODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO):\n        super().__init__()\n        self.mode = mode",
         "detail": "git_observer.watcher",
         "documentation": {}
     },
@@ -357,7 +357,7 @@
         "kind": 5,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "MODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        # self.commit_delay = commit_delay",
+        "peekOfCode": "MODE_PATTERN = \"pattern\"\n# Liste des fichiers modifiés\nMODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO):\n        super().__init__()\n        self.mode = mode\n        # self.commit_delay = commit_delay",
         "detail": "git_observer.watcher",
         "documentation": {}
     },
@@ -366,7 +366,7 @@
         "kind": 5,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "MODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        # self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()",
+        "peekOfCode": "MODIFIED_FILES = {}\nFILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO):\n        super().__init__()\n        self.mode = mode\n        # self.commit_delay = commit_delay\n        self.last_commit_time = time.time()\n        self.config = init_and_load_config()",
         "detail": "git_observer.watcher",
         "documentation": {}
     },
@@ -375,7 +375,7 @@
         "kind": 5,
         "importPath": "git_observer.watcher",
         "description": "git_observer.watcher",
-        "peekOfCode": "FILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message=\"Mise à jour automatique\"):\n        super().__init__()\n        self.mode = mode\n        # self.commit_delay = commit_delay\n        self.default_message = default_message\n        self.last_commit_time = time.time()\n        self.config = init_and_load_config()",
+        "peekOfCode": "FILE_HASHES = {}\nclass GitAutoCommitHandler(FileSystemEventHandler):\n    \"\"\"Surveille les fichiers et déclenche des commits automatiques ou sur modification.\"\"\"\n    def __init__(self, mode=MODE_AUTO):\n        super().__init__()\n        self.mode = mode\n        # self.commit_delay = commit_delay\n        self.last_commit_time = time.time()\n        self.config = init_and_load_config()\n        self.default_message = self.config['commit_message']",
         "detail": "git_observer.watcher",
         "documentation": {}
     }
