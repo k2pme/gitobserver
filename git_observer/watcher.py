@@ -131,7 +131,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         input_thread.start()
 
         input_thread.join(timeout=self.response_delay)  # attend max 2 min
-
+        
         if confirmation_result["value"] == "o":
             self.execute_commit()
             
