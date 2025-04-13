@@ -60,7 +60,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             
         elif self.mode == MODE_PATTERN and event_type == "modified":
             commit_message = GitHandler.extract_commit_message(file_path)
-            
+        
             if commit_message:
         
                 GitHandler.git_commit_push(commit_message)

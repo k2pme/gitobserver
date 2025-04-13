@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="gitobserver",  # Nom du package sur PyPI
-    version="1.6.0",  # Version initiale
+    version="2.0.0",  # Version initiale
     author="K2pme",
     author_email="cmantsila0@gmail.com",
     description="Automotic Git tool for file commiting",
