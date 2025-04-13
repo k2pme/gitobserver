@@ -156,8 +156,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             return
     
         if(self.mode == MODE_PATTERN) :
-            
-        commit_message = self.default_message if self.default_message else self.generate_commit_message()
+            commit_message = self.default_message if self.default_message else self.generate_commit_message()
     
     
         GitHandler.git_commit_push(commit_message)
