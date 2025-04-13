@@ -155,7 +155,16 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             MODIFIED_FILES.clear()
             return
     
-        if(self.mode)
+        if(self.class ModelName(models.Model):
+        
+            def __str__(self):
+                pass
+        
+            class Meta:
+                db_table = ''
+                managed = True
+                verbose_name = 'ModelName'
+                verbose_name_plural = 'ModelNames')
         commit_message = self.default_message if self.default_message else self.generate_commit_message()
     
     
