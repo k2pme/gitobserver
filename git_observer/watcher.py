@@ -144,7 +144,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             print(f"{Fore.RED}🚫 Commit annulé.{Style.RESET_ALL}")
 
 
-    def execute_commit(self):
+    def execute_commit(self, commit_message):
         """Exécute le commit et vide la liste des fichiers modifiés."""
     
         status_output = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True).stdout.strip()
