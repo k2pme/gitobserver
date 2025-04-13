@@ -107,8 +107,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
 
          # Lancement du thread d'attente utilisateur
         confirmation_result = {"value": None}
-        
-        
+         
         def get_user_input():
             
             try:
@@ -120,7 +119,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
                 
                 confirmation_result["value"] = None
                 
-
+                
         input_thread = threading.Thread(target=get_user_input)
         input_thread.daemon = True
         input_thread.start()
