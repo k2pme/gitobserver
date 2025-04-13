@@ -1,6 +1,0 @@
-{
-    "commit_delay": 5,
-    "commit_patern": "feat: auto commit",
-    "response_delay": 2,
-    "max_files": 10
-}
