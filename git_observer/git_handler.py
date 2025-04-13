@@ -3,7 +3,8 @@ from colorama import Fore, Style
 
 class GitHandler:
     """Gère les interactions avec Git"""
-
+    self.config = init_and_load_config()
+    
     @staticmethod
     def extract_commit_message(file_path):
         """Cherche une ligne contenant commit_name="message" et retourne le message."""
