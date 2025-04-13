@@ -24,7 +24,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
     def __init__(self, mode=MODE_AUTO, commit_delay=30, default_message="Mise à jour automatique"):
         super().__init__()
         self.mode = mode
-        self.commit_delay = commit_delay
+        # self.commit_delay = commit_delay
         self.default_message = default_message
         self.last_commit_time = time.time()
         self.config = init_and_load_config()
@@ -34,9 +34,6 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         self.response_delay = self.config['response_delay'] if self.config.get('response_delay') else 2
         self.max_files = self.config['max_files'] if self.config.get('max_files') else 10,
         
-        self.commit_patern = "feat: auto commit",
-        self.response_delay = 2,
-        self.max_files = 10
 
 
     def on_any_event(self, event):
