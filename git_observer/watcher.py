@@ -111,7 +111,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         def get_user_input():
             
             try:
-                
+            
                 confirmation = input(f"{Fore.YELLOW}Confirmer le commit ? (o/N) {Style.RESET_ALL}").strip().lower()
                 confirmation_result["value"] = confirmation
                 
