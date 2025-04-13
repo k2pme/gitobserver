@@ -1,18 +1,22 @@
 import subprocess
 from colorama import Fore, Style
+from git_observer.utils import init_and_load_config, read_config
 
 class GitHandler:
     """Gère les interactions avec Git"""
-    self.config = init_and_load_config()
+    
     
     @staticmethod
     def extract_commit_message(file_path):
         """Cherche une ligne contenant commit_name="message" et retourne le message."""
+        
+        config = read_config()
+        
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 for line in f:
                     if "commit_name=" in line:
-                        parts = line.split("commit_name=", 1)
+                        parts = line.split(config['commit_patern'], 1)
                         if len(parts) > 1:
                             message = parts[1].strip().replace('"', '')
                             return message if message else None
