@@ -31,7 +31,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         self.default_message = str(self.config['commit_message'])
         self.commit_delay = int(self.config['commit_delay'])
         self.commit_patern = str(self.config['commit_patern'])
-        self.response_delay = self.config['response_delay']
+        self.response_delay = int(self.config['response_delay'])
         self.max_files = self.config['max_files']
         
 
