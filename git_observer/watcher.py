@@ -155,12 +155,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             MODIFIED_FILES.clear()
             return
     
-        if(self.mode == MODE_PATTERN):
-            commit_message = GitHandler.extract_commit_message(list(MODIFIED_FILES.keys())[0])
-            
-            if not commit_message:
-                print(f"{Fore.YELLOW}⚠️ Aucun message de commit trouvé, utilisation du message par défaut.{Style.RESET_ALL}")
-                commit_message = self.default_message if self.default_message else self.generate_commit_message()
+        if(self.mode)
         commit_message = self.default_message if self.default_message else self.generate_commit_message()
     
     
