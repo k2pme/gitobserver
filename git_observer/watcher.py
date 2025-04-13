@@ -105,30 +105,35 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         for file in MODIFIED_FILES:
             print(f"  - {file}")
 
-        # Fonction pour commit auto après timeout
-        def auto_commit():
+         # Lancement du thread d'attente utilisateur
+        confirmation_result = {"value": None}
+        
+        
+        def get_user_input():
             
+            try:
+                
+                confirmation = input(f"{Fore.YELLOW}Confirmer le commit ? (o/N) {Style.RESET_ALL}").strip().lower()
+                confirmation_result["value"] = confirmation
+                
+            except Exception:
+                
+                confirmation_result["value"] = None
+                
+
+        input_thread = threading.Thread(target=get_user_input)
+        input_thread.daemon = True
+        input_thread.start()
+
+        input_thread.join(timeout=120)  # attend max 2 min
+
+        if confirmation_result["value"] == "o":
+            self.execute_commit()
+            
+        elif confirmation_result["value"] is None:
             print(f"\n{Fore.YELLOW}⏳ Temps écoulé. Commit automatique en cours...{Style.RESET_ALL}")
             self.execute_commit()
-
-        # Démarrer un timer de 2 minutes (120 secondes)
-        timer = threading.Timer(120, auto_commit)
-        timer.start()
-
-        try:
-            
-            confirmation = input(f"{Fore.YELLOW}Confirmer le commit ? (o/N) {Style.RESET_ALL}").strip().lower()
-            timer.cancel()  # Annuler le timer si l'utilisateur répond avant les 2 minutes
-            
-        except KeyboardInterrupt:
-            
-            print(f"\n{Fore.YELLOW}⏳ Temps écoulé. Commit automatique en cours...{Style.RESET_ALL}")
-            self.execute_commit()
-
-        if confirmation == "o":
-            
-            self.execute_commit()
-            
+    
         else:
             
             print(f"{Fore.RED}🚫 Commit annulé.{Style.RESET_ALL}")
